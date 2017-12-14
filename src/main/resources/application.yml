@@ -9,3 +9,9 @@ spring:
   mvc.view:
     prefix: /WEB-INF/
     suffix: .jsp
+
+s3:
+  endpointUrl: http://127.0.0.1:9000
+  accessKey: 0NS0NAEJVPSD04Z6MAYX
+  secretKey: I+WTgsjXJJX9wkBdpqEWAl8m9W1hhhO/CZyaocE8
+  bucketName: moviefun

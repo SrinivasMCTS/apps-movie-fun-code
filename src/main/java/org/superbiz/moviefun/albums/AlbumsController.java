@@ -1,5 +1,6 @@
 package org.superbiz.moviefun.albums;
 
+import javassist.bytecode.ByteArray;
 import org.apache.tika.Tika;
 import org.apache.tika.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.superbiz.moviefun.BlobStore;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -70,11 +72,13 @@ public class AlbumsController {
 
         System.out.println("getting ---- " + format("covers/%d", albumId));
         Optional<Blob> blob = blobStore.get(format("covers/%d", albumId));
+        //InputStream tInput = blob.get().getInputStream();
 
-        HttpHeaders headers = createImageHttpHeaders(blob.get().getContentType(), IOUtils.toByteArray(blob.get().getInputStream()));
+        byte[] tByteArr = IOUtils.toByteArray(blob.get().getInputStream());
+        HttpHeaders headers = createImageHttpHeaders(blob.get().getContentType(), tByteArr);
 
 
-        return new HttpEntity<>(IOUtils.toByteArray(blob.get().getInputStream()), headers);
+        return new HttpEntity<>(tByteArr, headers);
     }
 
 

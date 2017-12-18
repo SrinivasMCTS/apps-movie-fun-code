@@ -25,6 +25,7 @@ public class AlbumsUpdater {
     private final BlobStore blobStore;
     private final AlbumsBean albumsBean;
 
+
     public AlbumsUpdater(BlobStore blobStore, AlbumsBean albumsBean) {
         this.blobStore = blobStore;
         this.albumsBean = albumsBean;
@@ -40,6 +41,7 @@ public class AlbumsUpdater {
     }
 
     public void update() throws IOException {
+
         Optional<Blob> maybeBlob = blobStore.get("albums.csv");
 
         if (!maybeBlob.isPresent()) {
@@ -86,4 +88,6 @@ public class AlbumsUpdater {
         maybeExisting.ifPresent(existing -> album.setId(existing.getId()));
         return album;
     }
+
+
 }
